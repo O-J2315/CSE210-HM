@@ -15,17 +15,16 @@ public class Journal {
 
     public void SaveToFile(string file){
 
-        
         string fileName = $@"C:\Users\nahom\OneDrive\Escritorio\journals\{file}.txt";
         
         if (!File.Exists(fileName)){
             using (StreamWriter streamWriter = File.CreateText(fileName)){
                 streamWriter.WriteLine("WELCOME TO THE JOURNAL - HERE ARE YOUR ENTRIES:");
+
                 foreach(Entry entry in _entries){
                     streamWriter.WriteLine($" - Date: {entry._date} Feeling {entry._emotionalState} - \n - Prompt: {entry._promptText} - \n - Response: {entry._entryText} - \n - Wrote from: {entry._location} - ");
                 }
-                Console.WriteLine($"\n{file} Has been saved to path: {fileName}");
-                Console.WriteLine("");
+                Console.WriteLine($"\n{file} Has been saved to path: {fileName}\n");
             }
         }else {
             using(StreamWriter streamWriter = File.AppendText(fileName)){
@@ -38,14 +37,13 @@ public class Journal {
     }
 
     public void LoadFromFile(string file){
+
         string fileName = $@"C:\Users\nahom\OneDrive\Escritorio\journals\{file}.txt";
 
         if(File.Exists(fileName)){
-            using (StreamReader sr = File.OpenText(fileName))
-            {
+            using (StreamReader sr = File.OpenText(fileName)){
                 string s = "";
-                while ((s = sr.ReadLine()) != null)
-                {
+                while ((s = sr.ReadLine()) != null){
                     Console.WriteLine(s);
                 }
                 Console.WriteLine("");

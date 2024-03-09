@@ -1,3 +1,9 @@
+//Added to my program a way to handle when a file already exists to not override it but instead to be able to append the 
+//new entries to the file that already exists.
+//Added more information to store in each entri. Location and Emotional state. As if the entry was a social media post. That way
+//the youger people would feel more enthusiat about wrtiting to a journal. A special format for each display was also arranged by me.
+ 
+
 using System;
 using System.Collections;
 
