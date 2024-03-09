@@ -1,6 +1,4 @@
 using System.Runtime.CompilerServices;
-
-
 public class Entry{
     public string _date;
     public string _promptText;

@@ -2,20 +2,17 @@ using System.IO;
 using System.IO.Enumeration;
 public class Journal {
     public List<Entry> _entries = new List<Entry>();
-
     public void AddEntry(Entry entry){
         this._entries.Add(entry);
     }
-
     public void DisplayAll(){
         foreach(Entry entry in _entries){
             entry.Display();
         }
     }
-
     public void SaveToFile(string file){
 
-        string fileName = $@"C:\Users\nahom\OneDrive\Escritorio\journals\{file}.txt";
+        string fileName = $@"C:\Users\nahom\OneDrive\Escritorio\journals\{file}.txt"; //This is the specified location of the stored journals
         
         if (!File.Exists(fileName)){
             using (StreamWriter streamWriter = File.CreateText(fileName)){
@@ -35,7 +32,6 @@ public class Journal {
             }
         }
     }
-
     public void LoadFromFile(string file){
 
         string fileName = $@"C:\Users\nahom\OneDrive\Escritorio\journals\{file}.txt";
