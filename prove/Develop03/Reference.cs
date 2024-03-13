@@ -12,7 +12,7 @@ public class Reference {
         _chapter = chapter;
         _verse = verse;
         _endVerse = 0;
-    }
+        }
     public Reference(string book,int chapter, int verse,int endVerse){
         _book = book;
         _chapter = chapter;
@@ -24,8 +24,9 @@ public class Reference {
         if(_endVerse==0){
             reference = $"{_book} {_chapter}:{_verse}";
             
+        }else if(_endVerse!=0){
+            reference = $"{_book} {_chapter}:{_verse}-{_endVerse}";
         }
-        reference = $"{_book} {_chapter}:{_verse}-{_endVerse}";
     return reference;
     }
 }
