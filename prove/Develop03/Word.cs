@@ -11,6 +11,7 @@ public class Word{
 
     public void Hide(){
         string newText = "";
+        
         foreach (char letter in _text){
            newText += "_";
         }
