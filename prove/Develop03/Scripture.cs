@@ -3,7 +3,6 @@ using System.Security.Cryptography.X509Certificates;
 public class Scripture {
     private Reference _reference;
     private List<Word> _words = new List<Word>();
-
     public Scripture(Reference theReference,string theText){
         _reference = theReference;
         string[] separators = new string[] {",", ".", "!", "\'", " ", "\'s"};
@@ -38,7 +37,6 @@ public class Scripture {
             }
         }
     }
-
     public bool IsCompletelyHidden(){
         bool aWordIsHidden = true;
 
