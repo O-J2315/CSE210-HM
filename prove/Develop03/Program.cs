@@ -33,7 +33,7 @@ class Program
         aScripture = new Scripture(theReference, "But charity is the pure love of Christ, and it endureth forever; and whoso is found possessed of it at the last day, it shall be well with him.");
         favScriptures.AddScripture(aScripture);
 
-        Scripture theScripture = new Scripture(favScriptures.GetRandomScripture());
+        Scripture theScripture = new Scripture(favScriptures.GetRandomScripture()); //Selectig a random scripture from the new library object
 
         string ans = "";
         while (ans!="quit"){

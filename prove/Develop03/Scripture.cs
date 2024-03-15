@@ -57,10 +57,4 @@ public class Scripture {
         }
         return aWordIsHidden;
     }
-    public Reference GetReference(){
-        return this._reference;
-    }
-    public List<Word> GetWords(){
-        return this._words;
-    }
 }
