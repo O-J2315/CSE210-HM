@@ -12,6 +12,10 @@ public class Scripture {
             _words.Add(aWord);
         }   
     }
+    public Scripture(Scripture scripture){
+        _reference = scripture._reference;
+        _words = scripture._words;
+    }
     public string GetDisplayText(){
         string wholeScripture = $"{_reference.GetDisplayText()} ";
         foreach(Word word in _words){
@@ -34,6 +38,8 @@ public class Scripture {
                 _words[index].Hide();
                 unUsedWords.Remove(index);
                 x+=1;
+            }else if (IsCompletelyHidden()){
+                x+=1;
             }
         }
     }
@@ -50,5 +56,11 @@ public class Scripture {
             }
         }
         return aWordIsHidden;
+    }
+    public Reference GetReference(){
+        return this._reference;
+    }
+    public List<Word> GetWords(){
+        return this._words;
     }
 }
