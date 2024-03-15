@@ -1,3 +1,7 @@
+//Added a new class Library that stores a list of scriptures in order to randomly select a different one each time the program starts again.
+//Also exceeding the requirements by randomly selecting the words to hidde from only the words that are not already hidden.
+
+
 using System;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -35,7 +39,7 @@ class Program
         while (ans!="quit"){
             Console.Clear();
             Console.WriteLine(theScripture.GetDisplayText());
-            Console.WriteLine("Press enter to continue or type 'quit' to finish:");
+            Console.WriteLine("\nPress enter to continue or type 'quit' to finish:");
             ans = Console.ReadLine();
             if(theScripture.IsCompletelyHidden() || ans=="quit"){
                             break;
