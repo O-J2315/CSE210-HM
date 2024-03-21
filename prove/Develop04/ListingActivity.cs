@@ -1,10 +1,8 @@
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
-
 public class ListingActivity : Activity {
     private int _count;
     private List<string> _prompts = new List<string>();
-    
     public ListingActivity(string name, string description, int duration):base(name, description, duration){
         _prompts.Add("Who are people that you appreciate?");
         _prompts.Add("What are personal strengths of yours?");

@@ -1,14 +1,16 @@
+//Extra credit done creating a new activity and adding an extra class to represent a scripture object. Similar to last week assignment.
+//Extra activity is a spiritual activity to relfect on the Savior Jesus Christ. Prompts a small scripture and selects random
+//questions to present to the user for him to reflect.
 using System;
 
 class Program
 {
     static void Main(string[] args)
     {
-
-        string activityName = "";
-        string activityDescription = "";
+        //Initializing Default variables that will later be changed
+        string activityName;
+        string activityDescription;
         int activityDuration = 10;
-
 
         int choice = 1;
         while (choice!=0){

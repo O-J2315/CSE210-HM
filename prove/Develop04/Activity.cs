@@ -12,7 +12,6 @@ public class Activity {
         _description = description;
         _duration = duration;
     }
-
     public void DisplayStartingMesagge(){
         Console.WriteLine($"Welcome to the {_name} Activity.\n\n{_description}");
     }

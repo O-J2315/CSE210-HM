@@ -1,7 +1,6 @@
 public class ReflectingActivity : Activity {
     private List<string> _prompts = new List<string>();
     private List<string> _questions = new List<string>();
-    
     public ReflectingActivity(string name, string description, int duration):base(name, description, duration){
         //Constructor initializes both lists with defaul values. Name, description and duration are handled by the
         //base class constructor and are set in the main program as specified.
@@ -20,7 +19,6 @@ public class ReflectingActivity : Activity {
         _questions.Add("What could you learn from this experience that applies to other situations?");
         _questions.Add("What did you learn about yourself through this experience?");
         _questions.Add("How can you keep this experience in mind in the future?");
-
     }
     public void Run(){
         Console.Clear();
@@ -46,7 +44,6 @@ public class ReflectingActivity : Activity {
         while (DateTime.Now<endTime){
             DisplayQuestions();
         }
-
         Console.WriteLine("\n");
         DisplayEndingMesagge();
     }

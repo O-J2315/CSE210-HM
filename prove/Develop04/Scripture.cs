@@ -6,9 +6,6 @@ public class Scripture {
         _reference = theReference;
         _words = theText;
     }
-    public string DisplayScripture(){
-        return $"{_reference} {_words}";
-    }
     public string GetReference(){
         return _reference;
     }

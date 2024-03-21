@@ -18,11 +18,9 @@ public class BreathingActivity : Activity {
 
         while (DateTime.Now<endTime){
             Console.Write("Breathe In...");
-            // Console.SetCursorPosition(0,Console.CursorTop -1);
             ShowCountDown(4);
 
             Console.Write("\nNow breath out...");
-            // Console.SetCursorPosition(0,Console.CursorTop -1);
             ShowCountDown(4);
             Console.WriteLine("\n");
         }
