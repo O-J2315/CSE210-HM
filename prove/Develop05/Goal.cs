@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
-
 public abstract class Goal{
     private string _shortName;
     private string _description;

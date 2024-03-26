@@ -44,7 +44,6 @@ public class GoalManager {
                 break;
             }
         } while (ans > 0);
-        
     }
     public void DisplayPlayerInfo(){
         Console.Write(_score);
