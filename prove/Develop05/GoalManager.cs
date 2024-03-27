@@ -1,16 +1,31 @@
+using System.Data;
 using System.IO; 
 public class GoalManager {
     private List<Goal> _goals = new List<Goal>();
     private int _score;
+    private List<string> _levels = new List<string>();
+    private string _currentLevel;
     public GoalManager(){
+        _score = 0;
+        _levels.Add("Greenie");
+        _levels.Add("Hustler");
+        _levels.Add("The Expert");
+        _levels.Add("La Leyenda");
+
+        _currentLevel = _levels[0];
     }
     public void Start(){
         int ans = 1;
+        Console.WriteLine("~~~~~WELCOME TO THE GOAL MASTER 3000~~~~~");
         do {
             //Console.Clear();
+            Console.WriteLine("----------------------------------------------------------------------------");
             Console.Write($"You have ");
             DisplayPlayerInfo();
-            Console.Write(" points!\n\n");
+            Console.Write(" points!\n");
+            CheckCurrentLevel();
+            Console.WriteLine($"Current Level: {GetCurrentLevel()}");
+            Console.WriteLine("----------------------------------------------------------------------------\n");
             Console.WriteLine("Menu Options:");
             Console.WriteLine(" 1. Create New Goal");
             Console.WriteLine(" 2. List Goals");
@@ -46,31 +61,42 @@ public class GoalManager {
         Console.Write(_score);
     }
     public void ListGoalNames(){
+        Console.Write("Gettign Goal names...");
+        ShowSpinner(5);
+        Console.WriteLine();
+        int index = 1;
         foreach(Goal goal in _goals){
-            Console.WriteLine(goal.GetName());
+            Console.WriteLine($"{index}. {goal.GetName()}");
+            index ++;
         }
     }
     public void ListGoalDetails(){
+        Console.Write("Gettign Goal Values...");
+        ShowSpinner(5);
         Console.Clear();
+        Console.WriteLine("----------------------------------------------------------------------------");
         int counter = 0;
         foreach (Goal goal in _goals){
             counter++;
             Console.WriteLine($" {counter}. {goal.GetDetailsString()}");
         }
-        Console.WriteLine("-----------------------------------------------------------------------");
+        Console.WriteLine($"You currently have {_goals.Count} goal(s)!");
+        if (_goals.Count == 0){
+            Console.WriteLine(" Create a new goal to start!");
+        }
     }
     public void CreateGoal(){
         Console.WriteLine("\nThe types of Goals are: ");
-        Console.WriteLine(" 1. Simple Goal");
-        Console.WriteLine(" 2. Eternal Goal");
-        Console.WriteLine(" 3. checklist Goal");
-        Console.WriteLine("Wich type of goal do you want to create?");
+        Console.WriteLine("     1. Simple Goal");
+        Console.WriteLine("     2. Eternal Goal");
+        Console.WriteLine("     3. checklist Goal");
+        Console.WriteLine("~Wich type of goal do you want to create?~");
         int ans = int.Parse(Console.ReadLine());
-        Console.WriteLine("What is the name of your goal? ");
+        Console.WriteLine("->What is the name of your goal? ");
         string goalName = Console.ReadLine();
-        Console.WriteLine("What is a short description of it? ");
+        Console.WriteLine("->What is a short description of it? ");
         string goalDescription = Console.ReadLine();
-        Console.WriteLine("What is the amount of points associated with this goal? ");
+        Console.WriteLine("->What is the amount of points associated with this goal? ");
         string goalPoints = Console.ReadLine();
         switch (ans){
             case 1:
@@ -82,9 +108,9 @@ public class GoalManager {
                 _goals.Add(newEternalGoal);
             break;
             case 3:
-                Console.WriteLine("How many times to accomplish this goal?");
+                Console.WriteLine("->How many times to accomplish this goal?");
                 int targetGoal = int.Parse(Console.ReadLine());
-                Console.WriteLine("What is the bonus for completing this goal?");
+                Console.WriteLine("->What is the bonus for completing this goal?");
                 int bonusGoal = int.Parse(Console.ReadLine());
                 ChecklistGoal newListGoal = new ChecklistGoal(goalName, goalDescription, goalPoints, targetGoal, bonusGoal);
                 _goals.Add(newListGoal);
@@ -93,15 +119,26 @@ public class GoalManager {
                 Start();
             break;
         }
+        Console.Write("Settign Goal Values...");
+        ShowSpinner(5);
+        Console.Clear();
+        Console.WriteLine("~New goal succesfully created!~");
     }
     public void RecordEvent(){
         Console.WriteLine("The goals are:");
         ListGoalNames();
-        Console.WriteLine("Wich goal did you accomplish? ");
-        int goalAccomplished = int.Parse(Console.ReadLine());
-        int addPoints = _goals[goalAccomplished-1].RecordEvent();
-        Console.WriteLine($"\nCongratulations! You have earned {addPoints} points!:D");
-        _score += addPoints;
+        if(_goals.Count==0){
+            Console.Write("Create a new goal to start!:D ");
+            ShowSpinner(5);
+            Console.Clear();
+        }else{
+            Console.WriteLine("->Wich goal did you accomplish? ");
+            int goalAccomplished = int.Parse(Console.ReadLine());
+            int addPoints = _goals[goalAccomplished-1].RecordEvent();
+            Console.WriteLine($"\nCongratulations! You have earned {addPoints} points!:D");
+            _score += addPoints;
+            CheckCurrentLevel();
+        }
     }
     public void SaveGoals(){
         Console.WriteLine("What is the name of the file? ");
@@ -113,6 +150,9 @@ public class GoalManager {
                 outputFile.WriteLine($"{goal.GetStringRepresentation()}");
             }
         }
+        Console.Write("Saving the history...");
+        ShowSpinner(5);
+        Console.WriteLine("Success!");
     }
     public void LoadGoals(){
         Console.WriteLine("What is the name of the file? ");
@@ -135,5 +175,58 @@ public class GoalManager {
                 _goals.Add(newlistGoal);
             }
         }
+        Console.Write("Loading the history... ");
+        ShowSpinner(5);
     }
-}
+    private string GetCurrentLevel(){
+        return _currentLevel;
+    }
+    private void LevelUp(int currentLevelIndex){
+        _currentLevel = _levels[currentLevelIndex+1];
+    }
+    public void CheckCurrentLevel(){
+        
+        if(_score>=5000){
+            Console.WriteLine("~Max Level Reached!~");
+            LevelUp(2);
+        }else if(_score>=2000){
+            LevelUp(1);
+            Console.WriteLine("~New level Achieved!~");
+        }else if(_score>=500){
+            LevelUp(0);
+            Console.WriteLine("~New level Achieved!~");
+        }
+    }
+     public void ShowSpinner(int seconds){
+
+        List<string> animationStrings = new List<string>
+        {
+            "|",
+            "/",
+            "-",
+            "\\",
+            "|",
+            "/",
+            "-",
+            "\\"
+        };
+
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(seconds);
+
+        int i = 0;
+
+        while (DateTime.Now < endTime){
+            String s = animationStrings[i];
+            Console.Write(s);
+            Thread.Sleep(500);
+            Console.Write("\b \b");
+
+            i++;
+
+            if (i>= animationStrings.Count){
+                i=0;
+            }
+        } 
+    }
+} 
