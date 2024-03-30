@@ -61,7 +61,7 @@ public class GoalManager {
         Console.Write(_score);
     }
     public void ListGoalNames(){
-        Console.Write("Gettign Goal names...");
+        Console.Write("Getting Goal names...");
         ShowSpinner(5);
         Console.WriteLine();
         int index = 1;
@@ -71,7 +71,7 @@ public class GoalManager {
         }
     }
     public void ListGoalDetails(){
-        Console.Write("Gettign Goal Values...");
+        Console.Write("Getting Goal Values...");
         ShowSpinner(5);
         Console.Clear();
         Console.WriteLine("----------------------------------------------------------------------------");
@@ -119,7 +119,7 @@ public class GoalManager {
                 Start();
             break;
         }
-        Console.Write("Settign Goal Values...");
+        Console.Write("Setting Goal Values...");
         ShowSpinner(5);
         Console.Clear();
         Console.WriteLine("~New goal succesfully created!~");
@@ -177,6 +177,7 @@ public class GoalManager {
         }
         Console.Write("Loading the history... ");
         ShowSpinner(5);
+        Console.WriteLine();
     }
     private string GetCurrentLevel(){
         return _currentLevel;
@@ -186,13 +187,13 @@ public class GoalManager {
     }
     public void CheckCurrentLevel(){
         
-        if(_score>=5000){
+        if(_score>=10000){
             Console.WriteLine("~Max Level Reached!~");
             LevelUp(2);
-        }else if(_score>=2000){
+        }else if(_score>=5000){
             LevelUp(1);
             Console.WriteLine("~New level Achieved!~");
-        }else if(_score>=500){
+        }else if(_score>=1000){
             LevelUp(0);
             Console.WriteLine("~New level Achieved!~");
         }
