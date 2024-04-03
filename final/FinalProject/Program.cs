@@ -4,6 +4,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello FinalProject World!");
+        Admin josueAdmin = new Admin();
+        Console.WriteLine("Insert User Name: ");
+        string username = Console.ReadLine();
+        Console.WriteLine("Insert Password: ");
+        string password = Console.ReadLine();
+        josueAdmin.Start(username,password);
+        
     }
 }
