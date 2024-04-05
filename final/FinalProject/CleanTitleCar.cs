@@ -1,6 +1,6 @@
 using System.Data;
 
-public class CleanTitleCar : Car {
+public class CleanTitleCar : Vehicle {
     private string _cleanTitle;
     private float _repairCost;
     private float _transportCost;
@@ -16,9 +16,9 @@ public class CleanTitleCar : Car {
     public override string GetStringRepresentation(){
         return $"";
     }
-     public override float GetRevenue(){
+    public override float GetRevenue(){
         float totalCost = GetInvoiceAmount() + _repairCost + _transportCost;
-        totalCost -= GetSellingPrice();
-        return totalCost;
+        float finalCost = GetSellingPrice() - totalCost;
+        return finalCost;
     }
 }

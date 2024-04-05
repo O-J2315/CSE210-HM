@@ -1,34 +1,59 @@
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata.Ecma335;
 
 public class Garage {
     private string _location = "Ignacio Zaragoza 2423, Ciudad Juarez, Chihuahua";
-    private List<Car> _carsInStock = new List<Car>();
-    private List<Car> _carsSold = new List<Car>();
+    private List<Vehicle> _vehiclesInStock = new List<Vehicle>();
+    private List<Vehicle> _vehiclesSold = new List<Vehicle>();
 
     public Garage(){
 
     }
-    public void DisplayCarsInStock(){
-        foreach(Car car in _carsInStock){
-            Console.WriteLine($"{car.GetDetails()}\n\n");
+    public void DisplayInStockVehicles(){
+        int vehicleCounter = 1;
+        Console.Clear();
+        Console.WriteLine($"In stock Vehicles in {_location}\n");
+        foreach(Vehicle vehicle in _vehiclesInStock){
+            Console.WriteLine($"{vehicleCounter} -> {vehicle.GetDetails()}");
+            vehicleCounter++;
         }
+        Console.WriteLine("\n\n");
     }
-    public void DisplayCarsSold(){
-        foreach(Car car in _carsSold){
-            Console.WriteLine(car.GetDetails());
+    public void DisplaySoldVehicles(){
+         int vehicleCounter = 1;
+        Console.Clear();
+        Console.WriteLine($"Sold Vehicles in {_location}\n");
+        foreach(Vehicle vehicle in _vehiclesSold){
+            Console.WriteLine($"{vehicleCounter} -> {vehicle.GetSoldDetails()}");
+            vehicleCounter++;
         }
+        Console.WriteLine("\n");
     }
     public float CalculateRevenue(){
         float totalRevenue = 0;
-        foreach(Car car in _carsSold){
+        foreach(Vehicle vehicle in _vehiclesSold){
 
-            totalRevenue += car.GetRevenue();
+            totalRevenue += vehicle.GetRevenue();
         }
         return totalRevenue;
     }
-    public void AddNewCar(Car newCar){
-        _carsInStock.Add(newCar);
-        Console.WriteLine($"{newCar} Added Sucessfully");
+    public void AddNewVehicle(Vehicle newVehicle){
+        _vehiclesInStock.Add(newVehicle);
+        Console.Clear();
+        Console.WriteLine($"{newVehicle} Added Sucessfully");
+    }
+
+    public void SellVehicle(Vehicle vehicle, int index,string buyerName,int buyerAge, float sellingCost){
+        _vehiclesInStock[index-1].SellVehicle(buyerName,buyerAge,sellingCost);
+        _vehiclesInStock.RemoveAt(index-1);
+        _vehiclesSold.Add(vehicle);
+    }
+    public Vehicle GetAVehicle(int index){
+        return _vehiclesInStock[index-1];
+    }
+
+    public int GetNumberOfVehiclesSold(){
+        return _vehiclesSold.Count();
     }
 
 }

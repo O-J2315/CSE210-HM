@@ -1,6 +1,6 @@
 using System.Data;
 
-public class ClassicCar : Car {
+public class ClassicCar : Vehicle {
     private bool _isRestored;
     private float _restorationCost;
 
@@ -16,7 +16,7 @@ public class ClassicCar : Car {
     }
      public override float GetRevenue(){
         float totalCost = GetInvoiceAmount() + _restorationCost;
-        totalCost -= GetSellingPrice();
-        return totalCost;
+        float finalCost = GetSellingPrice() - totalCost;
+        return finalCost;
     }
 }

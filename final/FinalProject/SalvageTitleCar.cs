@@ -1,6 +1,6 @@
 using System.Data;
 
-public class SalvageTitleCar : Car {
+public class SalvageTitleCar : Vehicle {
     private string _salvageTitle;
     private float _repairCost;
     private float _transportCost;
@@ -20,7 +20,7 @@ public class SalvageTitleCar : Car {
     }
     public override float GetRevenue(){
         float totalCost = GetInvoiceAmount() + _repairCost + _exportCost + _transportCost;
-        totalCost -= GetSellingPrice();
-        return totalCost;
+        float finalCost = GetSellingPrice() - totalCost;
+        return finalCost;
     }
 }

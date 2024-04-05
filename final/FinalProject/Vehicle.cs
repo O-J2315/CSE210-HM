@@ -1,6 +1,6 @@
 using System.Runtime.Versioning;
 
-public abstract class Car {
+public abstract class Vehicle {
     private int _year;
     private string _make;
     private string _model;
@@ -17,7 +17,7 @@ public abstract class Car {
     private float _sellingPrice;
     private float _revenue;
 
-    public Car(int year,string make,string model, string vin, int miles, string motor, string transmission, string docType, float invoice, string dateA){
+    public Vehicle(int year,string make,string model, string vin, int miles, string motor, string transmission, string docType, float invoice, string dateA){
         _year = year;
         _make = make;
         _model = model;
@@ -36,12 +36,15 @@ public abstract class Car {
         return _sellingPrice;
     }
     public virtual string GetDetails(){
-        return $"{_year} {_make} {_model} Odometer: {_miles} Miles. Motor: {_motor}";
+        return $"{_year} | {_make} | {_model} | {_miles} Miles | Motor: {_motor}";
+    }
+    public string GetSoldDetails(){
+        return $"{_year} | {_make} | {_model} | {_miles} Miles | Sold for: {_sellingPrice} | Buyer info: {_buyerName}, {_buyerAge} years old.";
     }
     public virtual string GetStringRepresentation(){
         return "";
     }
-    public void SellCar(string buyerName,int buyerAge, float sellingPrice){
+    public void SellVehicle(string buyerName,int buyerAge, float sellingPrice){
         _buyerName = buyerName;
         _buyerAge = buyerAge;
         _sellingPrice = sellingPrice;
