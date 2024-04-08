@@ -77,8 +77,8 @@ public class Admin {
     private void LoadGarage(){
         string[] lines = System.IO.File.ReadAllLines($@"C:\Users\nahom\OneDrive\Escritorio\Computer Science-BYUI\CSE210-HM\final\FinalProject\HernandezAutosales.txt");
         
-        for(int index=0; index<lines.Length; index++){
-            string[] parts = lines[index].Split("|");
+        for(int index = 0; index < lines.Length; index ++){
+            string[] parts = lines[index].Split("|");// | is used to split instead of the common , because date time object has comas that I want to keep.
             string vehicleType = parts[0];
             switch (vehicleType){
                 case "bike":
