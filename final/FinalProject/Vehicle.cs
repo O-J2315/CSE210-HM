@@ -28,7 +28,30 @@ public abstract class Vehicle {
         _docType = docType;
         _invoiceAmount = invoice;
         _dateAdquired = dateA;
+        _isSold = false;
+        _buyerName = "Not Sold";
+        _buyerAge = 0;
+        _sellingPrice = 0;
+        _revenue = 0;
     }
+    public Vehicle(int year,string make,string model, string vin, int miles, string motor, string transmission, string docType, float invoice, string dateA,bool isSold, string buyerName, int buyerAge, float sellingPrice, float revenue){
+        _year = year;
+        _make = make;
+        _model = model;
+        _VIN = vin;
+        _miles = miles;
+        _motor = motor;
+        _transmission = transmission;
+        _docType = docType;
+        _invoiceAmount = invoice;
+        _dateAdquired = dateA;
+        _isSold = isSold;
+        _buyerName = buyerName;
+        _buyerAge = buyerAge;
+        _sellingPrice = sellingPrice;
+        _revenue = revenue;
+    }
+
     public float GetInvoiceAmount(){
         return _invoiceAmount;
     }
@@ -42,7 +65,7 @@ public abstract class Vehicle {
         return $"{_year} | {_make} | {_model} | {_miles} Miles | Sold for: {_sellingPrice} | Buyer info: {_buyerName}, {_buyerAge} years old.";
     }
     public virtual string GetStringRepresentation(){
-        return "";
+        return $"{_year}|{_make}|{_model}|{_VIN}|{_miles}|{_motor}|{_transmission}|{_docType}|{_invoiceAmount}|{_dateAdquired}|{_isSold}|{_buyerName}|{_buyerAge}|{_sellingPrice}|{_revenue}";
     }
     public void SellVehicle(string buyerName,int buyerAge, float sellingPrice){
         _buyerName = buyerName;
@@ -51,5 +74,12 @@ public abstract class Vehicle {
         _isSold = true;
     }
     public abstract float GetRevenue();
+
+    public void SetRevenue(float revenue){
+        _revenue = revenue;
+    }
+    public bool GetIsSold(){
+        return _isSold;
+    }
 
 }

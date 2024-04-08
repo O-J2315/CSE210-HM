@@ -1,11 +1,12 @@
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
 
 public class Admin {
     private Garage _garage = new Garage();
     private List<string> _userNames = new List<string>();
     private List<string> _passwords = new List<string>();
-
     public Admin(){
+        //These are the allowed users and passwords till today
         _userNames.Add("josuehernandez2");
         _userNames.Add("agustinhernandez2");
         _passwords.Add("ferrari890");
@@ -13,60 +14,123 @@ public class Admin {
     }
     public void Start(string username, string password){
         if(_userNames.Contains(username) && _passwords.Contains(password)){
-            int ans = 1;
+            string ans = "1";
             Console.Clear();
             Console.WriteLine($"Welcome back {username} to Hernandez AutoSales Management System\n");
+            LoadGarage();//This method will always load the records we have in our business.
             do{
-                Console.WriteLine("1. Display Car Stock");
-                Console.WriteLine("2. Add New Vehicle");
-                Console.WriteLine("3. Sell A Vehicle");
-                Console.WriteLine("4. Display Total Revenue");
-                Console.WriteLine("5. Display Sold Vehicles");
-                Console.WriteLine("6. Save changes");
-                Console.WriteLine("0. Exit");
+                Console.WriteLine("1. Display Vehicle Stock");
+                Console.WriteLine("2. Display Sold Vehicles");
+                Console.WriteLine("3. Display Total Revenue");
+                Console.WriteLine("4. Sold A Vehicle");
+                Console.WriteLine("5. Add New Vehicle");
+                Console.WriteLine("0. Exit WITHOUT saving changes");
+                Console.WriteLine("\nPress any key to EXIT");//Program automatically saves changes made to the program
 
-                Console.WriteLine("Choose an option from the menu: ");
-                ans = int.Parse(Console.ReadLine());
+                ans = Console.ReadLine();
 
                 switch(ans){
-                    case 1:
+                    case "1":
                         _garage.DisplayInStockVehicles();
-                    break;
-
-                    case 2:
-                        AddNewVehicle();
-                    break;
-
-                    case 3:
-                        SellVehicle();
-                    break;
-
-                    case 4:
-                        DisplayTotalRevenue();
-                    break;
-
-                    case 5:
-                        _garage.DisplaySoldVehicles();
-                    break;
-
-                    case 6:
                         SaveGarage();
                     break;
 
-                    default:
+                    case "2":
+                        _garage.DisplaySoldVehicles();
+                        SaveGarage();
+                    break;
+
+                    case "3":
+                        DisplayTotalRevenue();
+                        SaveGarage();
+                    break;
+
+                    case "4":
+                        SellVehicle();
+                        SaveGarage();
+                    break;
+
+                    case "5":
+                        AddNewVehicle();
+                        SaveGarage();
+                    break;
+
+                    case "0":
                         Console.WriteLine("Shutting down...");
-                        ans = 0;
+                        ans = "0";
+                    break;
+
+                    default:
+                        SaveGarage();//Before shutting down program will always save changes made to the records.
+                        Console.WriteLine("Shutting down...");
+                        ans = "0";
                     break;
                 }
                 
-            }while(ans != 0);
+            }while(ans != "0");
 
         }else{
             Console.WriteLine("Incorrect Username or password");
         }
     }
     public void SaveGarage(){
+        List<Vehicle> allVehicles = _garage.GetAllVehicles();
 
+        using (StreamWriter outputFile = new StreamWriter($@"C:\Users\nahom\OneDrive\Escritorio\journals\HernandezAutosales.txt")){
+              foreach(Vehicle vehicle in allVehicles){
+                outputFile.WriteLine(vehicle.GetStringRepresentation());
+            }
+        }
+    }
+    private void LoadGarage(){
+        string[] lines = System.IO.File.ReadAllLines($@"C:\Users\nahom\OneDrive\Escritorio\journals\HernandezAutosales.txt");
+        
+        for(int index=0; index<lines.Length; index++){
+            string[] parts = lines[index].Split("|");
+            string vehicleType = parts[0];
+            switch (vehicleType){
+                case "bike":
+                    Bike bike = new Bike(int.Parse(parts[1]),parts[2],parts[3],parts[4],int.Parse(parts[5]),parts[6],parts[7],parts[8],float.Parse(parts[9]),parts[10],bool.Parse(parts[11]),parts[12],int.Parse(parts[13]),float.Parse(parts[14]),float.Parse(parts[15]),parts[16],float.Parse(parts[17]));
+                    if(bool.Parse(parts[11])){
+                        _garage.AddNewSoldVehicle(bike);
+                    }else if(!bool.Parse(parts[11])){
+                        _garage.AddNewVehicle(bike);
+                    }
+                break;
+                case "salvage":
+                    SalvageTitleCar salvageTitleCar = new SalvageTitleCar(int.Parse(parts[1]),parts[2],parts[3],parts[4],int.Parse(parts[5]),parts[6],parts[7],parts[8],float.Parse(parts[9]),parts[10],bool.Parse(parts[11]),parts[12],int.Parse(parts[13]),float.Parse(parts[14]),float.Parse(parts[15]),parts[16],float.Parse(parts[17]),float.Parse(parts[18]),float.Parse(parts[19]));
+                    if(bool.Parse(parts[11])){
+                        _garage.AddNewSoldVehicle(salvageTitleCar);
+                    }else if(!bool.Parse(parts[11])){
+                        _garage.AddNewVehicle(salvageTitleCar);
+                    }
+                break;
+                case "clean":
+                    CleanTitleCar cleanTitleCar = new CleanTitleCar(int.Parse(parts[1]),parts[2],parts[3],parts[4],int.Parse(parts[5]),parts[6],parts[7],parts[8],float.Parse(parts[9]),parts[10],bool.Parse(parts[11]),parts[12],int.Parse(parts[13]),float.Parse(parts[14]),float.Parse(parts[15]),parts[16],float.Parse(parts[17]),float.Parse(parts[18]));
+                    if(bool.Parse(parts[11])){
+                        _garage.AddNewSoldVehicle(cleanTitleCar);
+                    }else if(!bool.Parse(parts[11])){
+                        _garage.AddNewVehicle(cleanTitleCar);
+                    }
+                break;
+                case "rebuilt":
+                    RebuiltTitleCar rebuiltTitleCar = new RebuiltTitleCar(int.Parse(parts[1]),parts[2],parts[3],parts[4],int.Parse(parts[5]),parts[6],parts[7],parts[8],float.Parse(parts[9]),parts[10],bool.Parse(parts[11]),parts[12],int.Parse(parts[13]),float.Parse(parts[14]),float.Parse(parts[15]),parts[16],float.Parse(parts[17]),float.Parse(parts[18]));
+                    if(bool.Parse(parts[11])){
+                        _garage.AddNewSoldVehicle(rebuiltTitleCar);
+                    }else if(!bool.Parse(parts[11])){
+                        _garage.AddNewVehicle(rebuiltTitleCar);
+                    }
+                break;
+                case "classic":
+                    ClassicCar classicCar = new ClassicCar(int.Parse(parts[1]),parts[2],parts[3],parts[4],int.Parse(parts[5]),parts[6],parts[7],parts[8],float.Parse(parts[9]),parts[10],bool.Parse(parts[11]),parts[12],int.Parse(parts[13]),float.Parse(parts[14]),float.Parse(parts[15]),bool.Parse(parts[16]),float.Parse(parts[17]));
+                    if(bool.Parse(parts[11])){
+                        _garage.AddNewSoldVehicle(classicCar);
+                    }else if(!bool.Parse(parts[11])){
+                        _garage.AddNewVehicle(classicCar);
+                    }
+                break;
+            }
+        }
     }
     public void AddNewVehicle(){
         Console.Clear();
@@ -95,8 +159,8 @@ public class Admin {
         string dateAdquired = thisDay.ToString("F");
         bool isRestored;
         float restorationCost = 0;
-        if(ans == 1){//if this is a car vehicle type it continues:
-            if(year<1990){
+        if(ans == 1){//if this is a car vehicle type it follows this path:
+            if(year<1990){//Previous cars since 1990 are considered as classics
                 Console.WriteLine("Is this classic car restored? (yes/no)");
                 string response = Console.ReadLine();
                 if (response=="yes"){
@@ -146,7 +210,6 @@ public class Admin {
 
                         RebuiltTitleCar RebuiltCar = new RebuiltTitleCar(year, make, model, VIN, miles, motor, transmission, docType, invoiceAmount, dateAdquired, title, repairCost, transportCost);
                         _garage.AddNewVehicle(RebuiltCar);
-
                     break;
                 }
             }
@@ -173,16 +236,13 @@ public class Admin {
         Console.WriteLine("What is the final selling cost? ");
         float sellingCost = float.Parse(Console.ReadLine());
         Console.Clear();
-        Console.WriteLine($"Confirmation: {_garage.GetAVehicle(ans)} Sold for: ${sellingCost} to: {buyerName}.\n");
+        Console.WriteLine($"Confirmation: {_garage.GetAVehicle(ans)} Sold for: ${sellingCost} to: {buyerName}.\n________________________________________________________________________________________________________________________________________________\n");
         _garage.SellVehicle(_garage.GetAVehicle(ans), ans, buyerName,buyerAge, sellingCost);
     }
     public void DisplayTotalRevenue(){
         Console.Clear();
         DateTime today = DateTime.Now;
         Console.WriteLine($"TOTAL REVENUE CALCULATOR UNTIL: {today.ToShortDateString()}\n");
-        Console.WriteLine($"TOTAL OF VEHICLES SOLD: {_garage.GetNumberOfVehiclesSold()}| TOTAL REVENUE -> {_garage.CalculateRevenue()}\n\n");
-    }
-    public void CalculateMonthlyRevenue(){
-
+        Console.WriteLine($"TOTAL OF VEHICLES SOLD: {_garage.GetNumberOfVehiclesSold()}| TOTAL REVENUE -> {_garage.CalculateRevenue()}\n_____________________________________________________________\n");
     }
 }

@@ -12,15 +12,22 @@ public class SalvageTitleCar : Vehicle {
         _transportCost = transportCost;
         _salvageTitle = title;
     }
+    public SalvageTitleCar(int year,string make,string model, string vin, int miles, string motor, string transmission, string docType, float invoice, string dateA,bool isSold, string buyerName, int buyerAge, float sellingPrice, float revenue, string title, float repairCost, float transportCost, float exportCost) : base (year, make, model, vin, miles, motor, transmission, docType, invoice, dateA, isSold, buyerName, buyerAge,sellingPrice, revenue){
+        _exportCost = exportCost;
+        _repairCost = repairCost;
+        _transportCost = transportCost;
+        _salvageTitle = title;
+    }
     public override string GetDetails(){
         return $"{_salvageTitle} Salvage Title "+ base.GetDetails();
     }
     public override string GetStringRepresentation(){
-        return $"";
+        return $"salvage|{base.GetStringRepresentation()}|{_salvageTitle}|{_repairCost}|{_transportCost}|{_exportCost}";
     }
     public override float GetRevenue(){
         float totalCost = GetInvoiceAmount() + _repairCost + _exportCost + _transportCost;
-        float finalCost = GetSellingPrice() - totalCost;
-        return finalCost;
+        float revenue = GetSellingPrice() - totalCost;
+        SetRevenue(revenue);
+        return revenue;
     }
 }
