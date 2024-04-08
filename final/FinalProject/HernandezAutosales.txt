@@ -1,0 +1,7 @@
+salvage|2019|nissan|kicks|1FHAUQYE4501SL|45000|gas|auto|salvage|5600|Monday, April 8, 2024 11:38:48 AM|False|Not Sold|0|0|0|texas|1000|400|1100
+salvage|2018|nissan|pathfinder|3FTHAGJWQ123|78000|gas|auto|salvage|4500|Monday, April 8, 2024 11:39:43 AM|False|Not Sold|0|0|0|texas|1200|450|1200
+clean|2015|ford|f-150|1F2019FNSKASNFK|75000|gas|auto|clean|7000|Monday, April 8, 2024 12:49:40 PM|False|Not Sold|0|0|0|New Mexico|1500|4500
+salvage|2012|honda|civic|2GOASJFJS2030MX|12000|gas|auto|salvage|3200|Monday, April 8, 2024 12:52:09 PM|False|Not Sold|0|0|0|texas|680|300|1000
+rebuilt|2015|honda|fit|3HGISOOQRPS0231|50000|gas|manual|rebuilt|3500|Monday, April 8, 2024 11:41:49 AM|True|alejandro|18|9000|4000|colorado|1000|500
+classic|1981|chevrolett|corvette|1FJALFMMCPR21|110000|gas|auto|clean|4000|Monday, April 8, 2024 11:40:34 AM|True|josue|22|7000|1800|False|1200
+salvage|2013|Dodge|challenger|1GFJASOFJ20J3LA|113000|gas|auto|salvage|3200|Monday, April 8, 2024 12:55:00 PM|True|Ricardo|40|8900|2950|texas|1200|350|1200

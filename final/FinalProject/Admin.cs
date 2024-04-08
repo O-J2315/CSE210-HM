@@ -32,27 +32,22 @@ public class Admin {
                 switch(ans){
                     case "1":
                         _garage.DisplayInStockVehicles();
-                        SaveGarage();
                     break;
 
                     case "2":
                         _garage.DisplaySoldVehicles();
-                        SaveGarage();
                     break;
 
                     case "3":
                         DisplayTotalRevenue();
-                        SaveGarage();
                     break;
 
                     case "4":
                         SellVehicle();
-                        SaveGarage();
                     break;
 
                     case "5":
                         AddNewVehicle();
-                        SaveGarage();
                     break;
 
                     case "0":
@@ -76,14 +71,14 @@ public class Admin {
     public void SaveGarage(){
         List<Vehicle> allVehicles = _garage.GetAllVehicles();
 
-        using (StreamWriter outputFile = new StreamWriter($@"C:\Users\nahom\OneDrive\Escritorio\journals\HernandezAutosales.txt")){
+        using (StreamWriter outputFile = new StreamWriter($@"C:\Users\nahom\OneDrive\Escritorio\Computer Science-BYUI\CSE210-HM\final\FinalProject\HernandezAutosales.txt")){
               foreach(Vehicle vehicle in allVehicles){
                 outputFile.WriteLine(vehicle.GetStringRepresentation());
             }
         }
     }
     private void LoadGarage(){
-        string[] lines = System.IO.File.ReadAllLines($@"C:\Users\nahom\OneDrive\Escritorio\journals\HernandezAutosales.txt");
+        string[] lines = System.IO.File.ReadAllLines($@"C:\Users\nahom\OneDrive\Escritorio\Computer Science-BYUI\CSE210-HM\final\FinalProject\HernandezAutosales.txt");
         
         for(int index=0; index<lines.Length; index++){
             string[] parts = lines[index].Split("|");
@@ -243,6 +238,6 @@ public class Admin {
         Console.Clear();
         DateTime today = DateTime.Now;
         Console.WriteLine($"TOTAL REVENUE CALCULATOR UNTIL: {today.ToShortDateString()}\n");
-        Console.WriteLine($"TOTAL OF VEHICLES SOLD: {_garage.GetNumberOfVehiclesSold()}| TOTAL REVENUE -> {_garage.CalculateRevenue()}\n_____________________________________________________________\n");
+        Console.WriteLine($"TOTAL OF VEHICLES SOLD: {_garage.GetNumberOfVehiclesSold()}| TOTAL REVENUE -> {_garage.CalculateRevenue()}\n___________________________________________________\n");
     }
 }
