@@ -1,6 +1,5 @@
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices.Marshalling;
-
 public class Admin {
     private Garage _garage = new Garage();
     private List<string> _userNames = new List<string>();
@@ -61,9 +60,7 @@ public class Admin {
                         ans = "0";
                     break;
                 }
-                
             }while(ans != "0");
-
         }else{
             Console.WriteLine("Incorrect Username or password");
         }

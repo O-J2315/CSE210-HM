@@ -58,13 +58,15 @@ public abstract class Vehicle {
     public float GetSellingPrice(){
         return _sellingPrice;
     }
+    //Some methods are defined a process even when the sub classes override them because the specific methods use also funcionality from the base methods.
+    //To not duplicate or re write the base common functionalities shared among classes I just use the "base.methodName" call to the base mehtod declaration in each subclass
     public virtual string GetDetails(){
         return $"{_year} | {_make} | {_model} | {_miles} Miles | Motor: {_motor}";
     }
     public string GetSoldDetails(){
         return $"{_year} | {_make} | {_model} | {_miles} Miles | Sold for: {_sellingPrice} | Buyer info: {_buyerName}, {_buyerAge} years old.";
     }
-    public virtual string GetStringRepresentation(){
+    public virtual string GetStringRepresentation(){//Base method is usefull to not reoeat the same code while overriding in each class, we just called the base method and added what was different to each class.
         return $"{_year}|{_make}|{_model}|{_VIN}|{_miles}|{_motor}|{_transmission}|{_docType}|{_invoiceAmount}|{_dateAdquired}|{_isSold}|{_buyerName}|{_buyerAge}|{_sellingPrice}|{_revenue}";
     }
     public void SellVehicle(string buyerName,int buyerAge, float sellingPrice){
@@ -73,7 +75,7 @@ public abstract class Vehicle {
         _sellingPrice = sellingPrice;
         _isSold = true;
     }
-    public abstract float GetRevenue();
+    public abstract float GetRevenue();//Revenue is calculated differently in each vehicle due to the different costs associated with them.
 
     public void SetRevenue(float revenue){
         _revenue = revenue;
@@ -81,5 +83,4 @@ public abstract class Vehicle {
     public bool GetIsSold(){
         return _isSold;
     }
-
 }

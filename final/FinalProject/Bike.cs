@@ -1,5 +1,4 @@
 using Microsoft.VisualBasic;
-
 public class Bike : Vehicle {
     private string _title; //Our business is only allowed to buy and sell clean title bikes from certain states in the US
     private float _transportCost;
@@ -17,7 +16,6 @@ public class Bike : Vehicle {
     }
     public override string GetStringRepresentation(){
         return $"bike|{base.GetStringRepresentation()}|{_title}|{_transportCost}";
-        
     }
      public override float GetRevenue(){
         float totalCost = GetInvoiceAmount() + _transportCost;

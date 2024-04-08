@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
-
 public class Garage {
     private string _location = "Ignacio Zaragoza 2423, Ciudad Juarez, Chihuahua";
     private List<Vehicle> _vehiclesInStock = new List<Vehicle>();
@@ -43,7 +42,6 @@ public class Garage {
     public void AddNewSoldVehicle(Vehicle newVehicle){
         _vehiclesSold.Add(newVehicle);
     }
-
     public void SellVehicle(Vehicle vehicle, int index,string buyerName,int buyerAge, float sellingCost){
         _vehiclesInStock[index-1].SellVehicle(buyerName,buyerAge,sellingCost);
         _vehiclesInStock[index-1].GetRevenue();
